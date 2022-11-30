@@ -2,12 +2,16 @@ package fr.esgi.cleancode.service;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
 
+@ExtendWith(MockitoExtension.class)
 public class SocialSecurityNumberValidatorServiceTest {
 
-    private final SocialSecurityNumberValidatorService socialSecurityNumberValidatorService = new SocialSecurityNumberValidatorService();
+    @InjectMocks
+    private SocialSecurityNumberValidatorService socialSecurityNumberValidatorService;
 
     @Test
     public void should_return_true_when_number_is_not_null(){

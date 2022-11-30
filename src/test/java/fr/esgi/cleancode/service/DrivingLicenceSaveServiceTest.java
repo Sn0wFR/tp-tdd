@@ -5,18 +5,19 @@ import fr.esgi.cleancode.exception.InvalidDriverSocialSecurityNumberException;
 import fr.esgi.cleancode.model.DrivingLicence;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.UUID;
 
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.when;
 
+@ExtendWith(MockitoExtension.class)
 public class DrivingLicenceSaveServiceTest {
 
-        @Mock
-        SocialSecurityNumberValidatorService socialSecurityNumberValidatorService;
         @InjectMocks
         DrivingLicenceSaveService drivingLicenceSaveService;
         @Mock
@@ -50,7 +51,6 @@ public class DrivingLicenceSaveServiceTest {
 
                 UUID id = UUID.randomUUID();
                 when(drivingLicence.getDriverSocialSecurityNumber()).thenReturn("123456789012345");
-                when(database.save(id,drivingLicence)).thenReturn(drivingLicence);
 
                 Assertions.assertDoesNotThrow(() -> drivingLicenceSaveService.save(drivingLicence));
                 Assertions.assertEquals(drivingLicence, drivingLicenceSaveService.save(drivingLicence));
