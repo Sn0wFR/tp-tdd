@@ -13,6 +13,7 @@ import java.util.Optional;
 import java.util.UUID;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
 
@@ -27,7 +28,12 @@ public class DrivingLicenceGenerationServiceTest {
 
     @Test
     void should_generate_driving_licence() {
-        final var drivingLicence = drivingLicenceGenerationService.generateNewDrivingLicence("123456789012345");
+        UUID uuid = UUID.randomUUID();
+
+        when(database.save(any(),any())).thenReturn(DrivingLicence.builder().id(uuid).driverSocialSecurityNumber("123456789012345").build());
+
+        DrivingLicence drivingLicence = drivingLicenceGenerationService.generateNewDrivingLicence("123456789012345");
+
         assertThat(drivingLicence.getId())
                 .isNotNull();
         assertThat(drivingLicence.getAvailablePoints())
