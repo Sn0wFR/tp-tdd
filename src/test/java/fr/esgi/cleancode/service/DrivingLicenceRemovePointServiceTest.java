@@ -37,7 +37,8 @@ public class DrivingLicenceRemovePointServiceTest {
 
         when(database.findById(uuid)).thenReturn(Optional.of(DrivingLicence.builder().id(uuid).driverSocialSecurityNumber("123456789012345").build()));
 
-        when(database.save(uuid, DrivingLicence.builder().id(uuid).driverSocialSecurityNumber("123456789012345").availablePoints(7).build()));
+        when(database.save(uuid, DrivingLicence.builder().id(uuid).driverSocialSecurityNumber("123456789012345").availablePoints(7).build()))
+                .thenReturn(DrivingLicence.builder().id(uuid).driverSocialSecurityNumber("123456789012345").availablePoints(7).build());;
 
         DrivingLicence drivingLicence =  drivingLicenceRemovePointService.removePoint(5, uuid);
 
