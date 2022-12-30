@@ -1,7 +1,6 @@
 package fr.esgi.cleancode.service;
 
 import fr.esgi.cleancode.database.InMemoryDatabase;
-import fr.esgi.cleancode.exception.InvalidDriverSocialSecurityNumberException;
 import fr.esgi.cleancode.exception.ResourceNotFoundException;
 import fr.esgi.cleancode.model.DrivingLicence;
 import org.junit.jupiter.api.Assertions;
@@ -27,9 +26,6 @@ public class DrivingLicenceRemovePointServiceTest {
     @Mock
     private InMemoryDatabase database;
 
-    @Mock
-    DrivingLicenceGenerationService drivingLicenceGenerationService;
-
     @Test
     void should_remove_points() {
 
@@ -38,7 +34,7 @@ public class DrivingLicenceRemovePointServiceTest {
         when(database.findById(uuid)).thenReturn(Optional.of(DrivingLicence.builder().id(uuid).driverSocialSecurityNumber("123456789012345").build()));
 
         when(database.save(uuid, DrivingLicence.builder().id(uuid).driverSocialSecurityNumber("123456789012345").availablePoints(7).build()))
-                .thenReturn(DrivingLicence.builder().id(uuid).driverSocialSecurityNumber("123456789012345").availablePoints(7).build());;
+                .thenReturn(DrivingLicence.builder().id(uuid).driverSocialSecurityNumber("123456789012345").availablePoints(7).build());
 
         DrivingLicence drivingLicence =  drivingLicenceRemovePointService.removePoint(5, uuid);
 
